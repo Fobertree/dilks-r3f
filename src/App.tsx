@@ -13,7 +13,7 @@ function App() {
   return (
      <>
       <div style={{width: '100vw', height: '100vh'}}>
-        <Canvas shadows camera = {{position: [30,30,30], fov: 30}}>
+        <Canvas shadows>
           <PlayerControls/>
           <color attach="background" args={["#1d3bb5"]}/>
           <ambientLight intensity={0.5}/>

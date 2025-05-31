@@ -3,6 +3,8 @@ import { PointerLockControls, PerspectiveCamera } from '@react-three/drei'
 import { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 
+const MOVE_SPEED : number = 5;
+
 export const PlayerControls = () => {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null!)
   const direction = new THREE.Vector3()
@@ -20,24 +22,37 @@ export const PlayerControls = () => {
     }
   }, [])
 
+  
+  // useEffect(() => {
+  //       cameraRef.current.position.set(0,0,0);
+  //       direction.set(0,0,0);
+  //   }, []) // TODO: hook this useEffect up to a level state manager
+
+
   useFrame((_, delta) => {
     const cam = cameraRef.current
     if (!cam) return
-
-    useEffect(() => {
-        cam.position.set(0,0,0);
-        direction.set(0,0,0);
-    }, []) // TODO: hook this useEffect up to a level state manager
-
-    if (keys.current['KeyW']) direction.z += 1
-    if (keys.current['KeyS']) direction.z -= 1
-    if (keys.current['KeyA']) direction.x += 1
-    if (keys.current['KeyD']) direction.x -= 1
+    
+    if (keys.current['KeyW']) direction.z = 1
+    if (keys.current['KeyS']) direction.z = -1
+    if (keys.current['KeyA']) direction.x = 1
+    if (keys.current['KeyD']) direction.x = -1
+    
+    // this is spaghetti, but we don't need a damping factor
+    if (!(
+      keys.current['KeyW'] || 
+      keys.current['KeyS'] || 
+      keys.current['KeyA'] || 
+      keys.current['KeyD']
+    )) {
+      direction.z = 0;
+      direction.x = 0;
+    }
 
     direction.normalize()
 
     // Get camera direction and apply movement
-    const moveSpeed = 5
+    const moveSpeed = MOVE_SPEED
     const forward = new THREE.Vector3()
     cam.getWorldDirection(forward)
     forward.y = 0

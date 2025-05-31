@@ -52,3 +52,6 @@ export default tseslint.config({
   },
 })
 ```
+
+# NOTES:
+For useFrame errors on correct code, it was only fixed by restarting my computer idk why
