@@ -52,3 +52,9 @@ export default tseslint.config({
   },
 })
 ```
+
+# NOTES:
+For useFrame errors on correct code, it was only fixed by restarting my computer idk why
+
+# TODO:
+GLTF loader for maps, we can do a convexHull or trimesh collider
