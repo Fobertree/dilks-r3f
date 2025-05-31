@@ -1,15 +1,20 @@
 // import { ActiveCollisionTypes } from "@dimforge/rapier3d-compat";
-import { Box, Sphere, PerspectiveCamera } from "@react-three/drei";
-import { useFrame, Canvas } from "@react-three/fiber";
-import { RapierRigidBody, RigidBody, Physics } from "@react-three/rapier";
-// import * as THREE from 'three'
+import { Box } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { RigidBody, Physics } from "@react-three/rapier";
+// import { useRef } from "react";
+
+import { PlayerControls } from "./PlayerControls";
 
 function App() {
+  // TODO: Pass ref into PlayerControls and MapController, so we can hook it up to the useEffect
+  // var level = useRef<string>("NONE");
 
   return (
      <>
       <div style={{width: '100vw', height: '100vh'}}>
         <Canvas shadows camera = {{position: [30,30,30], fov: 30}}>
+          <PlayerControls/>
           <color attach="background" args={["#1d3bb5"]}/>
           <ambientLight intensity={0.5}/>
           <directionalLight position={[-10,10,0]} intensity={0.4}/>
